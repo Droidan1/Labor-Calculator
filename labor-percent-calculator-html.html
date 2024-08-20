@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retail Labor Percent Calculator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <div class="bg-white p-8 rounded-lg shadow-md max-w-md w-full">
+        <h1 class="text-2xl font-bold mb-4">Retail Labor Percent Calculator</h1>
+        <div class="space-y-4">
+            <div>
+                <label for="projectedSales" class="block text-sm font-medium text-gray-700">Projected Daily Sales ($)</label>
+                <input type="number" id="projectedSales" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" placeholder="Enter projected sales">
+            </div>
+            <div>
+                <label for="totalHours" class="block text-sm font-medium text-gray-700">Total Labor Hours</label>
+                <input type="number" id="totalHours" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" placeholder="Enter total hours">
+            </div>
+            <div>
+                <label for="averageWage" class="block text-sm font-medium text-gray-700">Average Hourly Wage ($)</label>
+                <input type="number" id="averageWage" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" value="14.50" placeholder="Enter average wage">
+            </div>
+            <button id="calculateBtn" class="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                Calculate Labor Percent
+            </button>
+            <div id="result" class="mt-4 text-lg font-semibold hidden"></div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('calculateBtn').addEventListener('click', function() {
+            const projectedSales = parseFloat(document.getElementById('projectedSales').value);
+            const totalHours = parseFloat(document.getElementById('totalHours').value);
+            const averageWage = parseFloat(document.getElementById('averageWage').value);
+
+            if (projectedSales && totalHours && averageWage) {
+                const laborCost = totalHours * averageWage;
+                const laborPercent = (laborCost / projectedSales) * 100;
+                
+                const resultElement = document.getElementById('result');
+                resultElement.textContent = `Calculated Labor Percent: ${laborPercent.toFixed(2)}%`;
+                resultElement.classList.remove('hidden');
+            } else {
+                alert('Please fill in all fields with valid numbers.');
+            }
+        });
+    </script>
+</body>
+</html>
